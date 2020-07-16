@@ -1,0 +1,12 @@
+# Copyright 2019-present Open Networking Foundation
+# SPDX-License-Identifier: Apache-2.0
+version: "3"
+
+services:
+  onos:
+    image: onosproject/onos:2.2.3
+    ports:
+      - "8181:8181" # HTTP
+      - "8101:8101" # SSH (CLI)
+    environment:
+      - ONOS_APPS=gui,pipelines.fabric,segmentrouting,lldpprovider,hostprovider

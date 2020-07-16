@@ -1,0 +1,45 @@
+{
+  "devices": {
+    "device:leaf1": {
+      "basic": {
+        "managementAddress": "grpc://10.128.13.223:28000?device_id=1",
+        "driver": "stratum-tofino",
+        "pipeconf": "org.stratumproject.fabric-tna.tofino.montara_sde_9_2_0"
+      },
+      "segmentrouting": {
+        "name": "leaf1",
+        "ipv4NodeSid": 100,
+        "ipv4Loopback": "192.168.0.100",
+        "ipv6NodeSid": 101,
+        "ipv6Loopback": "2000::c0a8:0100",
+        "routerMac": "00:00:00:00:01:00",
+        "isEdgeRouter": true,
+        "adjacencySids": []
+      }
+    }
+  },
+  "ports": {
+    "device:leaf1/128": {
+      "interfaces": [
+        {
+          "name": "h1",
+          "ips": [
+            "10.0.1.254/24"
+          ],
+          "vlan-untagged": 10
+        }
+      ]
+    },
+    "device:leaf1/136": {
+      "interfaces": [
+        {
+          "name": "h2",
+          "ips": [
+            "10.0.2.254/24"
+          ],
+          "vlan-untagged": 20
+        }
+      ]
+    }
+  }
+}
