@@ -44,11 +44,10 @@ make onos-cli
 git clone https://github.com/stratum/fabric-tna.git
 ```
 
-- Build fabric-tna pipeline and pipeconf
+- Build fabric-tna pipeconf
 
 ```bash
 cd fabric-tna
-make fabric
 make pipeconf
 ```
 
