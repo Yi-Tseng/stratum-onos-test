@@ -18,7 +18,7 @@ make hosts
 
 ### ONOS
 
-- To start ONOS container
+- Start ONOS container
 
 ```bash
 make onos-start

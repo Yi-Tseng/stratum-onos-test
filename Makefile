@@ -12,7 +12,7 @@ onos-start:
 onos-stop:
 	docker-compose down -t0
 
-onos-restart: stop start
+onos-restart: onos-stop onos-start
 
 onos-cli:
 	ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -p 8101 onos@localhost

@@ -9,4 +9,4 @@ services:
       - "8181:8181" # HTTP
       - "8101:8101" # SSH (CLI)
     environment:
-      - ONOS_APPS=gui,pipelines.fabric,segmentrouting,lldpprovider,hostprovider
+      - ONOS_APPS=gui,drivers.stratum,drivers.barefoot,segmentrouting,lldpprovider,hostprovider
