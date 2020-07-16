@@ -4,7 +4,7 @@
       "basic": {
         "managementAddress": "grpc://10.128.13.223:28000?device_id=1",
         "driver": "stratum-tofino",
-        "pipeconf": "org.stratumproject.fabric-tna.tofino.montara_sde_9_2_0"
+        "pipeconf": "org.stratumproject.fabric.stratum_bfrt.montara_sde_9_2_0"
       },
       "segmentrouting": {
         "name": "leaf1",
