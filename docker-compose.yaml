@@ -5,6 +5,12 @@ version: "3"
 services:
   onos:
     image: onosproject/onos:2.2.3
+    # There's something wrong with docker compose in node2
+    # Without network_mode host, onos cannot reach the switch
+    # It works when doing just docker run, but not via compose
+    network_mode: host
+    volumes:
+      - ./tmp/onos:/root/onos/apache-karaf-4.2.8/data/tmp
     ports:
       - "8181:8181" # HTTP
       - "8101:8101" # SSH (CLI)

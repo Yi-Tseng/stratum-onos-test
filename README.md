@@ -1,68 +1,79 @@
 # Stratum + ONOS test config
 
-## Prerequests
+## Prerequisites
 
 - Docker (tested with version 19.03)
 - Docker compose (version 1.26)
-- automake tool (for make command)
+- make
 
-## Set up the server
+## Set up switch
 
-### 1. Hosts
+SSH into switch:
 
-- Set up virtual hosts (network namespaces)
+    ssh root@10.128.13.223
 
-```bash
-make hosts
-```
+Copy latest stratum_bfrt docker image:
 
-### 2. ONOS
+    scp onlbuilder@10.254.1.15:~/stratum-images/stratum-bfrt-9.2.0.tgz /tmp
+    docker load < /tmp/stratum-bfrt-9.2.0.tgz
 
+Start stratum_bfrt container:
+
+    CHASSIS_CONFIG=/root/chassis_config.pb.txt DOCKER_IMAGE=stratumproject/stratum-bfrt DOCKER_IMAGE_TAG=9.2.0 ./start-stratum-container.sh --bf-sim
+
+## Set up server
+
+SSH into server:
+
+    ssh cord@10.128.13.88
+    cd ~/stratum-onos-test
+
+### Start ONOS and connect to switch
+
+Copy the fabric-tna pipeconf oar in `./fabric-tna-1.0.0-SNAPSHOT.oar` (it should
+already be available on the server).
+
+Start ONOS:
+
+    make start
+
+This command will:
 - Start ONOS container
+- Enable gRPC message logging (located in `./tmp/onos/grpc_*.log`)
+- Install fabric-tna pipeconf
 
-```bash
-make onos-start
-```
+That will take some time to complete. While you wait, on a separate terminal
+window, open the ONOS log and keep an eye on it:
 
-- Push netcfg, ONOS won't try to connect to the switch until we push the pipeline.
+    make onos-log
 
-```bash
-make netcfg
-```
+Once `make start` completes, push netcfg to trigger connection to the switch
+from ONOS:
 
-- ONOS CLI
+    make netcfg-simple
 
-```bash
-make onos-cli
-```
+Observe stratum logs and ONOS logs for possible errors.
 
-### 3. Build and push Fabric-TNA pipeconf
+A log of all gRPC messages sent from ONOS to the switch is available under 
+`./tmp/onos/grpc_*.log`. The filename changes at each execution, to find out:
 
-- Clone fabric-tna pipeconf
+    make grpc-log
 
-```bash
-git clone https://github.com/stratum/fabric-tna.git
-```
+### Test connectivity (WIP)
 
-- Build fabric-tna pipeconf
+Instructions are still work in progress.
 
-```bash
-cd fabric-tna
-make pipeconf
-```
+### Other commands
 
-- Push pipeconf to ONOS
+To access the ONOS CLI:
 
-```bash
-make pipeconf-install
-```
+    make onos-cli
 
-## Set up the switch
+To set up virtual hosts (network namespaces):
 
-Deploy `chassis-config.pb.txt` to the switch and start the Stratum.
+    make hosts
 
-### Clear test setup
+To stop ONOS and clear the setup:
 
-```bash
-make clear
-```
+    make clear
+
