@@ -4,7 +4,7 @@ version: "3"
 
 services:
   onos:
-    image: onosproject/onos:2.2.3
+    image: onosproject/onos:2.2-latest
     # There's something wrong with docker compose in node2
     # Without network_mode host, onos cannot reach the switch
     # It works when doing just docker run, but not via compose
