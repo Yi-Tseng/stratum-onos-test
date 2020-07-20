@@ -33,6 +33,10 @@ netcfg-simple:
 	${onos_curl} -X POST -H 'Content-Type:application/json' \
 		${onos_url}/v1/network/configuration/ -d@./netcfg-simple.json
 
+netcfg-routing:
+	${onos_curl} -X POST -H 'Content-Type:application/json' \
+		${onos_url}/v1/network/configuration/ -d@./netcfg-routing.json
+
 hosts:
 	sudo ./vhost.py prov vhost.json
 
