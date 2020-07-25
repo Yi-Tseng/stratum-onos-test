@@ -1,0 +1,27 @@
+{
+  "hosts": [
+      {
+          "name": "h1",
+          "interfaces": [
+              { "name": "ens6f1", "address": "10.0.1.1/24", "gateway": "10.0.1.254" }
+          ],
+          "cmd": [
+              ["ip", "addr"],
+              ["ip", "route"]
+          ]
+      },
+      {
+        "name": "h2",
+        "interfaces": [
+            { "name": "ens6f0" }
+        ],
+        "vlans": [
+            { "name": "ens6f0.20", "parent": "ens6f0", "vlan": "20", "tpid": "802.1q", "address": "10.0.2.1/24", "gateway": "10.0.2.254"}
+        ],
+        "cmd": [
+            ["ip", "addr"],
+            ["ip", "route"]
+        ]
+    }
+  ]
+}

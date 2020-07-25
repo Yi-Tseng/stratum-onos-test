@@ -32,7 +32,7 @@
           "ips": [
             "10.0.2.254/24"
           ],
-          "vlan-untagged": 20
+          "vlan-tagged": [20]
         }
       ]
     }

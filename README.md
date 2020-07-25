@@ -47,6 +47,10 @@ window, open the ONOS log and keep an eye on it:
 
     make onos-log
 
+To access the ONOS CLI:
+
+    make onos-cli
+
 Once `make start` completes, push netcfg to trigger connection to the switch
 from ONOS:
 
@@ -59,21 +63,37 @@ A log of all gRPC messages sent from ONOS to the switch is available under
 
     make grpc-log
 
-### Test connectivity (WIP)
+Pick a test from the ones available below and run the corresponding commands.
 
-Instructions are still work in progress.
-
-### Other commands
-
-To access the ONOS CLI:
-
-    make onos-cli
-
-To set up virtual hosts (network namespaces):
-
-    make hosts
-
-To stop ONOS and clear the setup:
+When done, stop ONOS and clear any host configuration:
 
     make clear
 
+NOTE: running different kinds of tests (e.g., routing and bridging) requires
+restarting ONOS.
+
+#### Test 1 - Routing
+
+    make netcfg-routing
+    make hosts-routing
+    # Wait for the netcfg to be applied (check ONOS log)
+    make check-routing
+
+Add default route using the ONOS CLI (`make onos-cli`) to trigger an update of
+the default action in the routing_v4 table:
+
+    onos> route-add 0.0.0.0/0 10.0.2.1
+
+#### Test 2 - Routing with VLAN-tagged host
+
+    make netcfg-routing-vlan
+    make hosts-routing-vlan
+    # Wait for the netcfg to be applied (check ONOS log)
+    make check-routing
+
+#### Test 3 - Bridging
+
+    make netcfg-bridging
+    make hosts-bridging
+    # Wait for the netcfg to be applied (check ONOS log)
+    make check-bridging

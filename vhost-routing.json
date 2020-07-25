@@ -1,9 +1,9 @@
 {
   "hosts": [
       {
-          "name": "host-1",
+          "name": "h1",
           "interfaces": [
-              { "name": "ens6f0", "address": "10.0.1.1/24", "gateway": "10.0.1.254" }
+              { "name": "ens6f1", "address": "10.0.1.1/24", "gateway": "10.0.1.254" }
           ],
           "cmd": [
               ["ip", "addr"],
@@ -11,9 +11,9 @@
           ]
       },
       {
-        "name": "host-2",
+        "name": "h2",
         "interfaces": [
-            { "name": "ens6f1", "address": "10.0.2.1/24", "gateway": "10.0.2.254" }
+            { "name": "ens6f0", "address": "10.0.2.1/24", "gateway": "10.0.2.254" }
         ],
         "cmd": [
             ["ip", "addr"],
