@@ -11,9 +11,16 @@ pull:
 start:
 	make onos-start
 	sleep 35
+	./onos-cmd app deactivate kafka
+	./onos-cmd app activate drivers.barefoot
 	./onos-cmd cfg set org.onosproject.grpc.ctl.GrpcChannelControllerImpl enableMessageLog true
-	make pipeconf-install
+	./onos-cmd cfg set org.onosproject.provider.general.device.impl.GeneralDeviceProvider checkupInterval 5
 	sleep 10
+	# FIXME: remove when fabric-tna will have explicit app requirement on
+	#  segmentrouting. Untile then, triggering a new activation should solve
+	#  the wiring problem as at this point segmentrouting should be active.
+	./onos-cmd app deactivate fabric-tna
+	./onos-cmd app activate fabric-tna
 
 onos-start:
 	docker-compose up -d
@@ -31,7 +38,7 @@ onos-log:
 	docker-compose logs -f onos
 
 pipeconf-install:
-	$(info *** Installing and activating pipeconf app in ONOS at ${ONOS_HOST}...)
+	$(info *** Replacing pipeconf app in ONOS at ${ONOS_HOST}...)
 	${onos_curl} -X POST -HContent-Type:application/octet-stream \
 		'${onos_url}/v1/applications?activate=true' \
 		--data-binary @./fabric-tna-1.0.0-SNAPSHOT.oar
@@ -78,3 +85,13 @@ clear: onos-stop clear-hosts
 
 grpc-log:
 	@ls tmp/onos/grpc_*.log
+
+up4-unload:
+	${onos_curl} -X DELETE  ${onos_url}/v1/applications/org.omecproject.up4
+
+up4-load:
+	${onos_curl} -X POST -HContent-Type:application/octet-stream \
+		'${onos_url}/v1/applications?activate=true' \
+		--data-binary @./up4-app-1.0.0-SNAPSHOT.oar
+	@echo
+

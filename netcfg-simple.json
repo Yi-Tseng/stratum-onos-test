@@ -4,7 +4,22 @@
       "basic": {
         "managementAddress": "grpc://10.128.13.223:28000?device_id=1",
         "driver": "stratum-tofino",
-        "pipeconf": "org.stratumproject.fabric.stratum_bfrt.montara_sde_9_2_0"
+        "pipeconf": "org.stratumproject.fabric-spgw-int.stratum_bfrt.montara_sde_9_2_0"
+      }
+    }
+  },
+  "apps": {
+    "org.omecproject.up4": {
+      "up4": {
+        "deviceId": "device:leaf1",
+        "s1uPrefix": "140.0.100.254/32",
+        "uePools": [
+          "17.0.0.0/24"
+        ]
+      },
+      "up4server": {
+        "grpcPort": 51001,
+        "p4RuntimeDeviceId": 1
       }
     }
   }
