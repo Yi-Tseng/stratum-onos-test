@@ -1,35 +1,58 @@
 {
-  "switches": [
+  "hosts": [
     {
-      "switchId": 1,
-      "name": "leaf1",
-      "deviceType": "legacy",
-      "ip": "192.168.0.100"
+      "name": "0C:C4:7A:19:6E:21/None_1",
+      "ip": "10.0.1.1"
+    },
+    {
+      "name": "0C:C4:7A:19:6E:20/None_2",
+      "ip": "10.0.2.1"
+    }
+  ],
+  "subnets": [
+    {
+      "name": "10.0.2.0/24",
+      "ip_subnet": "10.0.2.0/24",
+      "subnet_id": 1
+    },
+    {
+      "name": "10.0.1.0/24",
+      "ip_subnet": "10.0.1.0/24",
+      "subnet_id": 3
     }
   ],
   "links": [
     {
-      "node1": "leaf1",
-      "node2": "h1",
+      "node1": "device:leaf1",
+      "node2": "10.0.2.0/24",
+      "port1": "140",
+      "port2": "-1"
+    },
+    {
+      "node1": "device:leaf1",
+      "node2": "10.0.1.0/24",
       "port1": "132",
       "port2": "-1"
     },
     {
-      "node1": "leaf1",
-      "node2": "h2",
+      "node1": "device:leaf1",
+      "node2": "0C:C4:7A:19:6E:21/None_1",
+      "port1": "132",
+      "port2": "-1"
+    },
+    {
+      "node1": "device:leaf1",
+      "node2": "0C:C4:7A:19:6E:20/None_1",
       "port1": "140",
       "port2": "-1"
     }
   ],
-  "hosts": [
+  "switches": [
     {
-      "ip": "10.1.0.1",
-      "name":"h1"
-    },
-    {
-      "ip": "10.2.0.1",
-      "name":"h2"
+      "name": "device:leaf1",
+      "ip": "192.168.0.100",
+      "deviceType": "legacy",
+      "switchId": 100
     }
   ]
 }
-
