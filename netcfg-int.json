@@ -28,7 +28,7 @@
     "org.onosproject.inbandtelemetry": {
       "report": {
         "collectorIp": "192.168.99.1",
-        "collectorPort": 9092,
+        "collectorPort": 32766,
         "minFlowHopLatencyChangeNs": 256
       }
     }
