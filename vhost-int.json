@@ -1,0 +1,24 @@
+{
+  "hosts": [
+    {
+      "name": "h1",
+      "interfaces": [
+        {
+          "name": "ens6f1",
+          "address": "10.0.1.1/24",
+          "gateway": "10.0.1.254"
+        }
+      ],
+      "cmd": [
+        [
+          "ip",
+          "addr"
+        ],
+        [
+          "ip",
+          "route"
+        ]
+      ]
+    }
+  ]
+}

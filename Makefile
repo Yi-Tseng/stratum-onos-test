@@ -1,8 +1,10 @@
 # Copyright 2019-present Open Networking Foundation
 # SPDX-License-Identifier: Apache-2.0
 ONOS_HOST ?= localhost
+ONOS_WEB_PORT ?= 18181
+ONOS_SSH_PORT ?= 18101
 
-onos_url := http://${ONOS_HOST}:8181/onos
+onos_url := http://${ONOS_HOST}:${ONOS_WEB_PORT}/onos
 onos_curl := curl --fail -sSL --user onos:rocks --noproxy localhost
 
 pull:
@@ -32,13 +34,15 @@ onos-reset:
 	./onos-cmd wipe-out please
 
 onos-cli:
-	ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -p 8101 onos@localhost
+	ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" -p "${ONOS_SSH_PORT}" onos@localhost
 
 onos-log:
 	docker-compose logs -f onos
 
-pipeconf-install:
+pipeconf-reinstall:
 	$(info *** Replacing pipeconf app in ONOS at ${ONOS_HOST}...)
+	./onos-cmd app deactivate fabric-tna
+	${onos_curl} -X DELETE '${onos_url}/v1/applications/org.stratumproject.fabric-tna'
 	${onos_curl} -X POST -HContent-Type:application/octet-stream \
 		'${onos_url}/v1/applications?activate=true' \
 		--data-binary @./fabric-tna-1.0.0-SNAPSHOT.oar
@@ -60,6 +64,10 @@ netcfg-bridging: netcfg-simple
 	${onos_curl} -X POST -H 'Content-Type:application/json' \
 		${onos_url}/v1/network/configuration/ -d@./netcfg-bridging.json
 
+netcfg-int: netcfg-simple
+	${onos_curl} -X POST -H 'Content-Type:application/json' \
+		${onos_url}/v1/network/configuration/ -d@./netcfg-int.json
+
 hosts-routing:
 	sudo ./vhost.py prov vhost-routing.json
 
@@ -68,6 +76,9 @@ hosts-routing-vlan:
 
 hosts-bridging:
 	sudo ./vhost.py prov vhost-bridging.json
+
+hosts-int:
+	sudo ./vhost.py prov vhost-int.json
 
 check-routing:
 	sudo ip netns exec h1 ping -c1 10.0.1.254
@@ -87,7 +98,7 @@ grpc-log:
 	@ls tmp/onos/grpc_*.log
 
 up4-unload:
-	${onos_curl} -X DELETE  ${onos_url}/v1/applications/org.omecproject.up4
+	${onos_curl} -X DELETE ${onos_url}/v1/applications/org.omecproject.up4
 
 up4-load:
 	${onos_curl} -X POST -HContent-Type:application/octet-stream \

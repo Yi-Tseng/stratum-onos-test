@@ -8,4 +8,4 @@ fi
 # Use sshpass to skip the password prompt
 docker run -it --rm --network host ictu/sshpass \
   -procks ssh -o "UserKnownHostsFile=/dev/null" \
-  -o "StrictHostKeyChecking=no" -o LogLevel=ERROR -p 8101 onos@localhost "$@"
+  -o "StrictHostKeyChecking=no" -o LogLevel=ERROR -p 18101 onos@localhost "$@"

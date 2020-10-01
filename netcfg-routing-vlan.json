@@ -1,20 +1,6 @@
 {
-  "devices": {
-    "device:leaf1": {
-      "segmentrouting": {
-        "name": "leaf1",
-        "ipv4NodeSid": 100,
-        "ipv4Loopback": "192.168.0.100",
-        "ipv6NodeSid": 101,
-        "ipv6Loopback": "2000::c0a8:0100",
-        "routerMac": "00:00:00:00:01:00",
-        "isEdgeRouter": true,
-        "adjacencySids": []
-      }
-    }
-  },
   "ports": {
-    "device:leaf1/128": {
+    "device:leaf1/132": {
       "interfaces": [
         {
           "name": "h1",
@@ -25,7 +11,7 @@
         }
       ]
     },
-    "device:leaf1/136": {
+    "device:leaf1/140": {
       "interfaces": [
         {
           "name": "h2",

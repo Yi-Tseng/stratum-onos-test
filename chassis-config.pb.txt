@@ -9,10 +9,10 @@ nodes {
   index: 1
 }
 singleton_ports {
-  id: 128
-  name: "1/0"
+  id: 132
+  name: "31/0"
   slot: 1
-  port: 1
+  port: 31
   speed_bps: 40000000000
   config_params {
     admin_state: ADMIN_STATE_ENABLED
@@ -21,10 +21,10 @@ singleton_ports {
   node: 1
 }
 singleton_ports {
-  id: 136
-  name: "2/0"
+  id: 140
+  name: "32/0"
   slot: 1
-  port: 2
+  port: 32
   speed_bps: 40000000000
   config_params {
     admin_state: ADMIN_STATE_ENABLED

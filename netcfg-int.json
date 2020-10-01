@@ -9,18 +9,28 @@
           ],
           "vlan-untagged": 10
         }
-      ]
+     ]
     },
     "device:leaf1/140": {
       "interfaces": [
         {
-          "name": "h2",
+          "name": "h2-and-di",
           "ips": [
-            "10.0.2.254/24"
+            "10.0.2.254/24",
+            "192.168.99.254/24"
           ],
           "vlan-untagged": 20
         }
       ]
+    }
+  },
+  "apps": {
+    "org.onosproject.inbandtelemetry": {
+      "report": {
+        "collectorIp": "192.168.99.1",
+        "collectorPort": 9092,
+        "minFlowHopLatencyChangeNs": 256
+      }
     }
   }
 }
