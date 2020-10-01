@@ -2,7 +2,7 @@
   "devices": {
     "device:leaf1": {
       "basic": {
-        "managementAddress": "grpc://10.92.1.81?device_id=1",
+        "managementAddress": "grpc://10.92.1.81:28001?device_id=1",
         "driver": "stratum-tofino",
         "pipeconf": "org.stratumproject.fabric-spgw-int.stratum_bfrt.montara_sde_9_2_0"
       },
