@@ -13,7 +13,7 @@ Start stratum_bfrt container:
     export CHASSIS_CONFIG=/root/stratum-configs/chassis_config.pb.txt
     export DOCKER_IMAGE=registry.aetherproject.org/tost/stratum-bfrt
     export DOCKER_IMAGE_TAG=9.2.0-4.14.49
-    ./start-stratum-container.sh
+    ./start-stratum-container.sh --bf_switchd_background=false
 
 ### Start ONOS and connect to switch
 
